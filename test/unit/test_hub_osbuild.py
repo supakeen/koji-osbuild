@@ -6,11 +6,11 @@ import jsonschema
 import koji
 from flexmock import flexmock
 
-from plugintest import PluginTest
+from plugintest import OSBuildPluginTest
 
 
-@PluginTest.load_plugin("hub")
-class TestHubPlugin(PluginTest):
+@OSBuildPluginTest.load_plugin("hub")
+class TestHubPlugin(OSBuildPluginTest):
 
     @staticmethod
     def mock_koji_context(*, times=1, admin=False):

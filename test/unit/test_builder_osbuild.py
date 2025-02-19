@@ -20,7 +20,7 @@ import requests
 import koji
 import httpretty
 
-from plugintest import PluginTest
+from plugintest import OSBuildPluginTest
 
 
 API_BASE = "api/image-builder-composer/v2/"
@@ -430,8 +430,8 @@ class MockHost:
         self.tags[build] = tags
 
 
-@PluginTest.load_plugin("builder")
-class TestBuilderPlugin(PluginTest): # pylint: disable=too-many-public-methods
+@OSBuildPluginTest.load_plugin("builder")
+class TestBuilderPlugin(OSBuildPluginTest): # pylint: disable=too-many-public-methods
 
     def setUp(self):
         super().setUp()

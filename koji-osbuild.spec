@@ -67,6 +67,17 @@ install -d %{buildroot}%{python3_sitelib}/koji_cli_plugins
 install -p -m 0644 plugins/cli/osbuild.py %{buildroot}%{python3_sitelib}/koji_cli_plugins/osbuild.py
 %py_byte_compile %{__python3} %{buildroot}%{python3_sitelib}/koji_cli_plugins/osbuild.py
 
+install -d %{buildroot}/%{_prefix}/lib/koji-hub-plugins
+install -p -m 0755 plugins/hub/imagebuilder.py %{buildroot}/%{_prefix}/lib/koji-hub-plugins/
+%py_byte_compile %{__python3} %{buildroot}/%{_prefix}/lib/koji-hub-plugins/imagebuilder.py
+
+install -d %{buildroot}/%{_prefix}/lib/koji-builder-plugins
+install -p -m 0755 plugins/builder/imagebuilder.py %{buildroot}/%{_prefix}/lib/koji-builder-plugins/
+%py_byte_compile %{__python3} %{buildroot}/%{_prefix}/lib/koji-builder-plugins/imagebuilder.py
+
+install -d %{buildroot}%{python3_sitelib}/koji_cli_plugins
+install -p -m 0644 plugins/cli/imagebuilder.py %{buildroot}%{python3_sitelib}/koji_cli_plugins/imagebuilder.py
+%py_byte_compile %{__python3} %{buildroot}%{python3_sitelib}/koji_cli_plugins/imagebuilder.py
 
 %if %{with tests}
 # Tests
@@ -112,6 +123,7 @@ install -m 0755 -vp test/container/hub/web.conf                 %{buildroot}/%{_
 
 install -m 0755 -vd                                             %{buildroot}/%{_datadir}/%{name}-tests/container/hub/plugin
 install -m 0755 -vp test/container/hub/plugin/osbuild.py        %{buildroot}/%{_datadir}/%{name}-tests/container/hub/
+install -m 0755 -vp test/container/hub/plugin/imagebuilder.py   %{buildroot}/%{_datadir}/%{name}-tests/container/hub/
 
 %endif
 
@@ -122,14 +134,20 @@ install -m 0755 -vp test/container/hub/plugin/osbuild.py        %{buildroot}/%{_
 %files hub
 %{_prefix}/lib/koji-hub-plugins/osbuild.py
 %{_prefix}/lib/koji-hub-plugins/__pycache__/osbuild.*
+%{_prefix}/lib/koji-hub-plugins/imagebuilder.py
+%{_prefix}/lib/koji-hub-plugins/__pycache__/imagebuilder.*
 
 %files builder
 %{_prefix}/lib/koji-builder-plugins/osbuild.py
 %{_prefix}/lib/koji-builder-plugins/__pycache__/osbuild.*
+%{_prefix}/lib/koji-builder-plugins/imagebuilder.py
+%{_prefix}/lib/koji-builder-plugins/__pycache__/imagebuilder.*
 
 %files cli
 %{python3_sitelib}/koji_cli_plugins/osbuild.py
 %{python3_sitelib}/koji_cli_plugins/__pycache__/osbuild.*
+%{python3_sitelib}/koji_cli_plugins/imagebuilder.py
+%{python3_sitelib}/koji_cli_plugins/__pycache__/imagebuilder.*
 
 %if %{with tests}
 

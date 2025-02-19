@@ -13,11 +13,11 @@ import koji
 import koji_cli.lib as kl
 from flexmock import flexmock
 
-from plugintest import PluginTest
+from plugintest import OSBuildPluginTest
 
 
-@PluginTest.load_plugin("cli")
-class TestCliPlugin(PluginTest):
+@OSBuildPluginTest.load_plugin("cli")
+class TestCliPlugin(OSBuildPluginTest):
 
     @staticmethod
     def mock_koji_lib(*, bg=False, task_result=0):
